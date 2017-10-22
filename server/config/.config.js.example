@@ -1,0 +1,7 @@
+
+module.exports = {
+  GITHIB_ID: XXXX,
+  GITHUB_SECRET: XXXX,
+  GITHUB_CALLBACK_URL: XXXX,
+  PORT: 3000
+}
