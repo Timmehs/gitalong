@@ -9,15 +9,15 @@ mongoose.connect('mongodb://127.0.0.1:27017/gitalong', {
 })
 
 const repoSchema = new Schema({
-  name: String,
-  githubId: Number,
+  name: { type: String, index: true },
+  githubId: { type: Number, index: { unique: true } },
   pushedAt: Date,
   createdAt: Date,
   stargazersCount: Number,
   htmlUrl: String,
   description: String,
   ownerLogin: String,
-  owner: { type: Schema.Types.ObjectId, ref: 'User' }
+  owner: { type: Schema.Types.ObjectId, ref: 'User', index: true }
 })
 
 module.exports = mongoose.model('Repo', repoSchema)

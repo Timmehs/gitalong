@@ -11,9 +11,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/gitalong', {
 const userSchema = new Schema({
   avatarUrl: String,
   githubUrl: String,
-  login: String,
+  login: { type: String, index: { unique: true } },
   lastLogin: Date,
-  githubId: Number,
+  githubId: { type: String, index: { unique: true } },
   accessToken: String,
   following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   followingEtag: String,
