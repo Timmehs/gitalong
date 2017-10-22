@@ -1,16 +1,6 @@
 const path = require('path')
 
-const babelLoader = {
-  test: /\.js/,
-  loader: 'babel-loader',
-  exclude: /node_modules/,
-  include: path.join(__dirname, 'client'),
-  query: {
-    presets: ['es2015', 'react', 'stage-0']
-  }
-}
-
-module.exports = {
+const babelLoader = (module.exports = {
   entry: __dirname + '/client/app.js',
   output: {
     filename: 'bundle.js',
@@ -18,6 +8,25 @@ module.exports = {
   },
   devtool: 'source-maps',
   module: {
-    loaders: [babelLoader]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'react']
+          }
+        }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' }
+        ]
+      }
+    ]
   }
-}
+})

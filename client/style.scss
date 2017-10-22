@@ -1,0 +1,14 @@
+@import '../node_modules/typebase.css/typebase.css';
+@import '../node_modules/flexboxgrid/dist/flexboxgrid.min.css';
+
+html {
+  font-size: 16px;
+}
+body {
+  color: #444;
+}
+
+header {
+  width: 100%;
+  justify-content: center;
+}
