@@ -1,10 +1,16 @@
 const path = require('path')
 
-const babelLoader = (module.exports = {
+module.exports = {
   entry: __dirname + '/client/app.js',
   output: {
     filename: 'bundle.js',
     path: __dirname + '/public'
+  },
+  resolve: {
+    alias: {
+      client: path.resolve(__dirname, 'client/'),
+      server: path.resolve(__dirname, 'server/')
+    }
   },
   devtool: 'source-maps',
   module: {
@@ -29,4 +35,4 @@ const babelLoader = (module.exports = {
       }
     ]
   }
-})
+}

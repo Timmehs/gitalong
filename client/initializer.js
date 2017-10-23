@@ -7,13 +7,11 @@ function initializeState() {
 
   return fromJS({
     user: user,
-    repoParams: {
-      includeFollowing: false,
-      includeFollowers: false,
-      includeMe: false
+    feedParams: {
+      includeFollowing: true,
+      includeFollowers: true,
+      includeMe: true
     },
-    following: [],
-    followers: [],
     repos: [],
     ui: {}
   })

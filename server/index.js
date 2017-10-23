@@ -8,8 +8,6 @@ const morgan = require('morgan')
 const createAuthRouter = require('./routes/authentication')
 const { passportSetup } = require('./lib/passport')
 
-var { initialState } = require('./lib/initial-state')
-
 const app = express()
 const port = 3000
 const SESSION_LENGTH = 72 * 60 * 60 * 1000 // 72 hours

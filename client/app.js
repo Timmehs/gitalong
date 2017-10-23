@@ -1,21 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import { createLogger } from 'redux-logger'
 
 import reducers from './reducers'
 import initializeState from './initializer'
 
-import style from './style.scss'
+import './styles/main.scss'
 
 import GitalongContainer from './containers/GitalongContainer'
 
-const store = createStore(reducers, initializeState())
-
-// Create an enhanced history that syncs navigation events with the store
-// const history = syncHistoryWithStore(browserHistory, store)
+const loggerMiddleware = createLogger()
+const store = createStore(
+  reducers,
+  initializeState(),
+  applyMiddleware(thunkMiddleware, loggerMiddleware)
+)
 
 ReactDOM.render(
   <Provider store={store}>
