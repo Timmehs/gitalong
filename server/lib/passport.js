@@ -30,7 +30,6 @@ const passportSetup = function(app) {
   })
 
   passport.use(
-    // TODO: Manage ENV
     new GitHubStrategy(
       {
         clientID: config.GITHUB_ID,
@@ -40,6 +39,7 @@ const passportSetup = function(app) {
       function(accessToken, refreshToken, profile, done) {
         const githubId = profile.id
         const options = { upsert: true, passRawResult: true, new: true }
+
         User.findOneAndUpdate(
           githubId,
           buildUserParameters(accessToken, profile._json),
