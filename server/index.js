@@ -12,7 +12,19 @@ const app = express()
 const port = 3000
 const SESSION_LENGTH = 72 * 60 * 60 * 1000 // 72 hours
 
-/* Middleware, Session, Passport */
+// Dev
+if (process.env.NODE_ENV !== 'production') {
+  const webpackDevMiddleware = require('webpack-dev-middleware')
+  const wpConfig = require('../webpack.config.js')
+  const compiler = require('webpack')(wpConfig)
+  app.use(
+    webpackDevMiddleware(compiler, {
+      publicPath: wpConfig.output.publicPath
+    })
+  )
+}
+
+// Middleware, Session, Passport
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
