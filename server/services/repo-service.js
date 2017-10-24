@@ -19,6 +19,16 @@ function getReposForUsers(userIds, currentUser, update = false) {
   }
 }
 
+function repoQuery(userIds, opts = { page: 1 }) {
+  return Repo.find({ owner: { $in: userIds } })
+    .skip((opts.page - 1) * 25)
+    .limit(25)
+    .sort({ pushedAt: -1 })
+    .select(
+      'name githubId pushedAt createdAt language stargazersCount htmlUrl description ownerLogin'
+    )
+}
+
 /**
  * Refresh User repos from Github.
  *
@@ -35,6 +45,7 @@ function getReposForUser(user, currentUser) {
   return github(currentUser)
     .repos.getForUser(opts)
     .then(({ meta, data }) => {
+      debugger
       if (meta.status === '200 OK') {
         const serializedRepos = data.map(repo => serializeRepo(repo, user))
         return Promise.all(upsertRepos(serializedRepos)).then(repos => {
@@ -99,5 +110,6 @@ function upsertRepos(serializedRepos) {
 
 module.exports = {
   getReposForUsers,
-  getReposForUser
+  getReposForUser,
+  repoQuery
 }

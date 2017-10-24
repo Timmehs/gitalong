@@ -1,5 +1,6 @@
 /* User Routes */
 const router = require('express').Router()
+
 const {
   updateAssociatedUsers,
   fullCommunitySync
@@ -7,11 +8,13 @@ const {
 
 const {
   getReposForUser,
-  getReposForUsers
+  getReposForUsers,
+  repoQuery
 } = require('../services/repo-service')
 const Repo = require('../models/Repo')
 
 const dedupeIDs = require('../lib/dedupeIDs')
+const elapsedTime = require('../lib/elapsedTime')
 
 router.use(require('../lib/passport').ensureAuthenticated)
 
@@ -27,25 +30,29 @@ router.get('/followers', ({ user }, res) => {
     .then(currentUser => res.send({ followers: currentUser.followers }))
 })
 
-router.get('/repos', ({ user, query }, res) => {
-  const page = query.page * 25
+function getRequiredIds(query, user) {
   const ids = ['following', 'followers'].reduce(function(result, param) {
     return query[param] ? result.concat(user[param]) : result
   }, [])
 
   if (query.me) ids.push(user._id)
 
-  let userIds = dedupeIDs(ids)
+  return dedupeIDs(ids)
+}
 
-  Repo.find({ owner: { $in: userIds } })
-    .limit(25)
-    .sort({ pushedAt: -1 })
-    .select(
-      'name githubId pushedAt createdAt language stargazersCount htmlUrl description ownerLogin'
+router.get('/repos', ({ user, query }, res) => {
+  const minutesSinceSync = elapsedTime(user.lastSyncedAt, 'm')
+  if (minutesSinceSync && minutesSinceSync < 10) {
+    console.log(`Skipping sync (Sync was ${minutesSinceSync}m ago)`)
+    queryPromise = repoQuery(getRequiredIds(query, user))
+  } else {
+    console.log('Syncing with Github..')
+    queryPromise = fullCommunitySync(user).then(() =>
+      repoQuery(getRequiredIds(query, user))
     )
-    .then(repos => {
-      res.send({ repos: repos })
-    })
+  }
+
+  queryPromise.then(repos => res.send({ repos: repos }))
 })
 
 module.exports = router

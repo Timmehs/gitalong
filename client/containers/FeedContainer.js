@@ -6,7 +6,7 @@ function mapStateToProps(state) {
   return {
     following: state.getIn(['feedParams', 'following']),
     followers: state.getIn(['feedParams', 'followers']),
-    reposLoaded: state.get('repos').size > 0,
+    user: state.get('user'),
     me: state.getIn(['feedParams', 'me'])
   }
 }

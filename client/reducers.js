@@ -1,4 +1,4 @@
-import { SET_FEED_PARAMS, SET_REPOS } from './actions'
+import { SET_FEED_PARAMS, SET_REPOS, SET_LOADING } from './actions'
 import { fromJS } from 'immutable'
 
 function user(action) {
@@ -13,6 +13,8 @@ function user(action) {
 function ui(action) {
   return function(state) {
     switch (action.type) {
+      case SET_LOADING:
+        return state.setIn(['loading', action.uiKey], action.isLoading)
       default:
         return state
     }

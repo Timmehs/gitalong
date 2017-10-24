@@ -11,11 +11,20 @@ export function setRepos(repos) {
   return { type: SET_REPOS, repos }
 }
 
+export const SET_LOADING = 'SET_LOADING'
+export function setLoading(uiKey, isLoading) {
+  return { type: SET_LOADING, uiKey, isLoading }
+}
+
 export function refreshFeed() {
   return function(dispatch, getState) {
     const currentParams = getState().get('feedParams')
     const feedQuery = feedQueryString(currentParams)
+
+    dispatch(setLoading('repos', true))
+
     get('/user/repos' + feedQuery).then(data => {
+      dispatch(setLoading('repos', false))
       dispatch(setRepos(data.repos))
     })
   }

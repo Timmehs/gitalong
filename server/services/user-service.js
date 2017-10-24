@@ -5,11 +5,6 @@ const dedupeIDs = require('../lib/dedupeIDs')
 const Promise = require('bluebird')
 
 /**
- * TODO: Make all of these methods as modular and single purpose as possible
- * All methods should be chainable for use in a router
- */
-
-/**
  * Accepts current user and the name of a relationship.
  * Pings Github for updated followers/following/???, with associated Etag.
  * If 304, populate association from database.
@@ -52,6 +47,7 @@ function fullCommunitySync(currentUser) {
       const ids = dedupeIDs(
         user.following.concat(user.followers).concat([user._id])
       )
+      debugger
       return getReposForUsers(ids, currentUser, true)
     })
     .then(user => {
@@ -60,8 +56,17 @@ function fullCommunitySync(currentUser) {
     })
 }
 
+function serializeUser(mongodbUser) {
+  const { login, githubUrl, avatarUrl } = mongodbUser
+  return {
+    login,
+    githubUrl,
+    avatarUrl
+  }
+}
+
 /* Helper Functions */
-function serializeUser(json) {
+function serializeGithubUser(json) {
   return {
     avatarUrl: json.avatar_url,
     githubUrl: json.html_url,
@@ -85,7 +90,7 @@ function buildAndSaveUsers(usersJSON) {
       {
         githubId: json.id
       },
-      serializeUser(json),
+      serializeGithubUser(json),
       options
     )
       .exec()

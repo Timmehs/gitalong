@@ -2,23 +2,16 @@ import React from 'react'
 import FeedControlls from './FeedControlls'
 import ReposContainer from 'client/containers/ReposContainer'
 
-const Feed = ({ followers, following, me, toggleFeedParam, reposLoaded }) => (
+const Feed = ({ followers, following, me, user, toggleFeedParam }) => (
   <div className="panel">
     <FeedControlls
       followers={followers}
       following={following}
       me={me}
+      user={user}
       toggleFeedParam={toggleFeedParam}
     />
-    {reposLoaded ? (
-      <ReposContainer />
-    ) : (
-      <div className="panel">
-        <h2 className="center">
-          Please wait, talking to Github... <span className="loader" />{' '}
-        </h2>
-      </div>
-    )}
+    <ReposContainer />
   </div>
 )
 

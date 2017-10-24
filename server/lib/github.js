@@ -11,7 +11,7 @@ function githubOptions(user, etag = '') {
 
 function github(user) {
   return new GitHubApi({
-    debug: process.env.NODE_ENV !== 'production',
+    debug: false,
     Promise: require('bluebird'),
     protocol: 'https',
     headers: {

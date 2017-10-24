@@ -13,7 +13,9 @@ function initializeState() {
       me: true
     },
     repos: [],
-    ui: {}
+    ui: {
+      loading: {}
+    }
   })
 }
 
