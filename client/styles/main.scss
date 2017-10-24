@@ -1,20 +1,28 @@
 @import '~flexboxgrid/dist/flexboxgrid.min.css';
 
+header {
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: whitesmoke;
+  margin-bottom: 2rem;
+  padding: 0 2rem;
+}
+
+header h1 {
+  display: inline-block;
+}
+
 html {
   font-size: 16px;
 }
 body {
+  margin: 0;
   color: #444;
 }
-
-header {
-  width: 100%;
-  justify-content: center;
-}
-
 .panel {
   padding: 2rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .center {

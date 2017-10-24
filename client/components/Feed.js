@@ -13,9 +13,10 @@ const Feed = ({ followers, following, me, toggleFeedParam, reposLoaded }) => (
     {reposLoaded ? (
       <ReposContainer />
     ) : (
-      <div>
-        Please wait, talking to Github...
-        <span className="loader" />
+      <div className="panel">
+        <h2 className="center">
+          Please wait, talking to Github... <span className="loader" />{' '}
+        </h2>
       </div>
     )}
   </div>
