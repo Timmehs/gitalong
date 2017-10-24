@@ -1,15 +1,17 @@
-var express = require('express')
-var router = express.Router()
-
+const router = require('express').Router()
 // User may be null when not logged in
 router.get('/', (req, res) => {
   const { user } = req
-  user
-    .populate('repos')
-    .execPopulate()
-    .then(user => {
-      res.render('index', { user: JSON.stringify(user) })
-    })
+  if (user) {
+    user
+      .populate('followers following')
+      .execPopulate()
+      .then(user => {
+        res.render('index', { user: JSON.stringify(user) })
+      })
+  } else {
+    res.render('index', { user: null })
+  }
 })
 
 module.exports = router

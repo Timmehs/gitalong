@@ -13,6 +13,7 @@ const repoSchema = new Schema({
   githubId: { type: Number, index: { unique: true } },
   pushedAt: Date,
   createdAt: Date,
+  language: String,
   stargazersCount: Number,
   htmlUrl: String,
   description: String,

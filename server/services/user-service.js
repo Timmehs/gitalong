@@ -1,8 +1,8 @@
 const User = require('../models/User')
-const Repo = require('../models/Repo')
+const { getReposForUsers } = require('./repo-service')
 const { github, githubOptions } = require('../lib/github')
+const dedupeIDs = require('../lib/dedupeIDs')
 const Promise = require('bluebird')
-
 
 /**
  * TODO: Make all of these methods as modular and single purpose as possible
@@ -42,6 +42,21 @@ function updateAssociatedUsers(currentUser, relationship) {
     })
     .catch(e => {
       throw Error(e)
+    })
+}
+
+function fullCommunitySync(currentUser) {
+  return updateAssociatedUsers(currentUser, 'following')
+    .then(user => updateAssociatedUsers(currentUser, 'followers'))
+    .then(user => {
+      const ids = dedupeIDs(
+        user.following.concat(user.followers).concat([user._id])
+      )
+      return getReposForUsers(ids, currentUser, true)
+    })
+    .then(user => {
+      currentUser.set('lastSyncedAt', Date.now())
+      return currentUser.save()
     })
 }
 
@@ -85,5 +100,6 @@ function buildAndSaveUsers(usersJSON) {
 }
 
 module.exports = {
-  updateAssociatedUsers
+  updateAssociatedUsers,
+  fullCommunitySync
 }

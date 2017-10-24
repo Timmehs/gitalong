@@ -1,12 +1,13 @@
 import { connect } from 'react-redux'
 import Feed from '../components/Feed'
-import { refreshFeed } from '../actions'
+import { refreshFeed, setFeedParams } from '../actions'
 
 function mapStateToProps(state) {
   return {
-    includeFollowing: state.getIn(['feedParams', 'includeFollowing']),
-    includeFollowers: state.getIn(['feedParams', 'includeFollowers']),
-    includeMe: state.getIn(['feedParams', 'includeMe'])
+    following: state.getIn(['feedParams', 'following']),
+    followers: state.getIn(['feedParams', 'followers']),
+    reposLoaded: state.get('repos').size > 0,
+    me: state.getIn(['feedParams', 'me'])
   }
 }
 
@@ -14,7 +15,8 @@ function mapDispatchToProps(dispatch) {
   return {
     // For checkbox params
     toggleFeedParam: ({ target }) => {
-      dispatch(refreshFeed({ [target.name]: target.checked }))
+      dispatch(setFeedParams({ [target.name]: target.checked }))
+      dispatch(refreshFeed())
     }
   }
 }

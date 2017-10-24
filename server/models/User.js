@@ -20,6 +20,7 @@ const userSchema = new Schema({
   followers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   followersEtag: String,
   repos: [{ type: Schema.Types.ObjectId, ref: 'Repo' }],
+  lastSyncedAt: Date,
   reposEtag: String
 })
 

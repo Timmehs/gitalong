@@ -8,9 +8,9 @@ function initializeState() {
   return fromJS({
     user: user,
     feedParams: {
-      includeFollowing: true,
-      includeFollowers: true,
-      includeMe: true
+      following: true,
+      followers: true,
+      me: true
     },
     repos: [],
     ui: {}

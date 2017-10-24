@@ -1,10 +1,17 @@
 /* User Routes */
 const router = require('express').Router()
-const { updateAssociatedUsers} = require('../services/user-service')
+const {
+  updateAssociatedUsers,
+  fullCommunitySync
+} = require('../services/user-service')
+
 const {
   getReposForUser,
   getReposForUsers
 } = require('../services/repo-service')
+const Repo = require('../models/Repo')
+
+const dedupeIDs = require('../lib/dedupeIDs')
 
 router.use(require('../lib/passport').ensureAuthenticated)
 
@@ -21,13 +28,24 @@ router.get('/followers', ({ user }, res) => {
 })
 
 router.get('/repos', ({ user, query }, res) => {
-  let userIds = []
-  if (query.following) userIds.push(...user.following)
-  if (query.followers) userIds.push(...user.followers)
+  const page = query.page * 25
+  const ids = ['following', 'followers'].reduce(function(result, param) {
+    return query[param] ? result.concat(user[param]) : result
+  }, [])
 
-  getReposForUsers(userIds, user, true).then(repos => {
-    res.send({ repos: repos })
-  })
+  if (query.me) ids.push(user._id)
+
+  let userIds = dedupeIDs(ids)
+
+  Repo.find({ owner: { $in: userIds } })
+    .limit(25)
+    .sort({ pushedAt: -1 })
+    .select(
+      'name githubId pushedAt createdAt language stargazersCount htmlUrl description ownerLogin'
+    )
+    .then(repos => {
+      res.send({ repos: repos })
+    })
 })
 
 module.exports = router

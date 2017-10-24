@@ -1,39 +1,34 @@
 import React from 'react'
 
-const FeedControlls = ({
-  includeFollowers,
-  includeFollowing,
-  includeMe,
-  toggleFeedParam
-}) => (
+const FeedControlls = ({ followers, following, me, toggleFeedParam }) => (
   <div className="row">
     <div className="col-xs-4 center">
-      <label htmlFor="include-followers">Include Followers</label>
+      <label htmlFor="followers">Include Followers</label>
       <input
-        id="include-followers"
+        id="followers"
         type="checkbox"
-        defaultChecked={includeFollowers}
-        name="includeFollowers"
+        defaultChecked={followers}
+        name="followers"
         onClick={toggleFeedParam}
       />
     </div>
     <div className="col-xs-4 center">
-      <label htmlFor="include-following">Include Following</label>
+      <label htmlFor="following">Include Following</label>
       <input
-        id="include-following"
+        id="following"
         type="checkbox"
-        defaultChecked={includeFollowing}
-        name="includeFollowing"
+        defaultChecked={following}
+        name="following"
         onClick={toggleFeedParam}
       />
     </div>
     <div className="col-xs-4 center">
-      <label htmlFor="include-me">Include Me</label>
+      <label htmlFor="me">Include Me</label>
       <input
-        id="include-me"
+        id="me"
         type="checkbox"
-        defaultChecked={includeMe}
-        name="includeMe"
+        defaultChecked={me}
+        name="me"
         onClick={toggleFeedParam}
       />
     </div>

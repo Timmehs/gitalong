@@ -11,20 +11,13 @@ const Promise = require('bluebird')
  */
 function getReposForUsers(userIds, currentUser, update = false) {
   if (update) {
-    return User.find({ _id: { $in: userIds } })
-      .then(users => {
-        Promise.all(users.map(u => {
-          getReposForUser(u, currentUser)
-            .then(user => user.populate('repos').execPopulate())
-            .then(user => user.repos)
-        }))
-      })
-      .then(() => Repo.find({ owner: { $in: userIds } }))
+    return User.find({ _id: { $in: userIds } }).then(users =>
+      Promise.all(users.map(u => getReposForUser(u, currentUser)))
+    )
   } else {
     return Repo.find({ owner: { $in: userIds } })
   }
 }
-
 
 /**
  * Refresh User repos from Github.
@@ -55,6 +48,7 @@ function getReposForUser(user, currentUser) {
         return user
       }
     })
+    .then(user => Repo.find({ owner: user._id }))
     .catch(err => {
       throw Error(err)
     })
@@ -87,7 +81,7 @@ function upsertRepos(serializedRepos) {
     const start = Date.now()
     return Repo.findOneAndUpdate(
       {
-        githubId: data.github_id
+        githubId: data.githubId
       },
       data,
       options

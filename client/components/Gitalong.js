@@ -15,7 +15,7 @@ const Gitalong = ({ user }) => (
         )}
       </div>
       <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-        <FeedContainer />
+        {user && <FeedContainer />}
       </div>
     </div>
   </main>
