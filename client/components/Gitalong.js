@@ -1,5 +1,5 @@
 import React from 'react'
-import FeedContainer from '../containers/FeedContainer'
+import FeedContainer from 'client/containers/FeedContainer'
 
 const Gitalong = ({ user }) => (
   <main>

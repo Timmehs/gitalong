@@ -45,7 +45,6 @@ function getReposForUser(user, currentUser) {
   return github(currentUser)
     .repos.getForUser(opts)
     .then(({ meta, data }) => {
-      debugger
       if (meta.status === '200 OK') {
         const serializedRepos = data.map(repo => serializeRepo(repo, user))
         return Promise.all(upsertRepos(serializedRepos)).then(repos => {

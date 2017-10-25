@@ -1,35 +1,33 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Iterable } from 'immutable'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
-import { Provider } from 'react-redux'
-import { createLogger } from 'redux-logger'
-
+import { AppContainer } from 'react-hot-loader'
+import { render } from 'react-dom'
 import reducers from './reducers'
-import initializeState from './initializer'
-
+import configureStore from './store'
 import './styles/main.scss'
+import Root from './components/Root'
+const rootEl = document.getElementById('main')
 
-import GitalongContainer from './containers/GitalongContainer'
-
-const loggerMiddleware = createLogger({
-  // Make immutable state readable in logs
-  stateTransformer: state => {
-    if (Iterable.isIterable(state)) return state.toJS()
-    else return state
-  }
-})
-
-const store = createStore(
-  reducers,
-  initializeState(),
-  applyMiddleware(thunkMiddleware, loggerMiddleware)
+render(
+  <AppContainer>
+    <Root store={configureStore()} />
+  </AppContainer>,
+  rootEl
 )
 
-ReactDOM.render(
-  <Provider store={store}>
-    <GitalongContainer />
-  </Provider>,
-  document.getElementById('main')
-)
+if (module.hot) {
+  module.hot.accept('./components/Root', () => {
+    try {
+      render(
+        <AppContainer>
+          <Root store={configureStore()} />
+        </AppContainer>,
+        rootEl
+      )
+    } catch (e) {
+      console.log('HMR Error')
+      console.error(e)
+      debugger
+      location.reload()
+    }
+  })
+}

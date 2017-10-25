@@ -47,7 +47,6 @@ function fullCommunitySync(currentUser) {
       const ids = dedupeIDs(
         user.following.concat(user.followers).concat([user._id])
       )
-      debugger
       return getReposForUsers(ids, currentUser, true)
     })
     .then(user => {

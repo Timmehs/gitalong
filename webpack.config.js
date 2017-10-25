@@ -1,11 +1,16 @@
 const path = require('path')
-
+const webpack = require('webpack')
 module.exports = {
-  entry: __dirname + '/client/app.js',
+  context: __dirname,
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    __dirname + '/client/app.js'
+  ],
   output: {
     filename: 'bundle.js',
     path: __dirname + '/public',
-    publicPath: '/'
+    publicPath: ''
   },
   resolve: {
     alias: {
@@ -13,6 +18,10 @@ module.exports = {
       server: path.resolve(__dirname, 'server/')
     }
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
   devtool: 'source-maps',
   module: {
     rules: [
