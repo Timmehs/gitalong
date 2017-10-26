@@ -3,12 +3,6 @@ const Repo = require('../models/Repo')
 const { github, githubOptions } = require('../lib/github')
 const Promise = require('bluebird')
 
-/**
- * Get
- *
- * @param
- * @returns
- */
 function getReposForUsers(userIds, currentUser, update = false) {
   if (update) {
     return User.find({ _id: { $in: userIds } }).then(users =>
@@ -24,8 +18,9 @@ function repoQuery(userIds, opts = { page: 1 }) {
     .skip((opts.page - 1) * 25)
     .limit(25)
     .sort({ pushedAt: -1 })
+    .populate('owner')
     .select(
-      'name githubId pushedAt createdAt language stargazersCount htmlUrl description ownerLogin'
+      'name githubId pushedAt createdAt language stargazersCount htmlUrl owner description ownerLogin'
     )
 }
 
@@ -72,6 +67,7 @@ function serializeRepo(repoJSON, user) {
     name: repoJSON.name,
     githubId: repoJSON.id,
     ownerLogin: repoJSON.owner.login,
+    language: repoJSON.language,
     owner: user._id,
     pushedAt: repoJSON.pushed_at,
     createdAt: repoJSON.created_at,

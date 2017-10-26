@@ -1,8 +1,8 @@
 import React from 'react'
 
 const FeedControlls = ({ followers, following, me, toggleFeedParam, user }) => (
-  <div className="row">
-    <div className="col-xs-4 center">
+  <ul className="feed-controlls">
+    <li>
       <label htmlFor="followers">
         Include Followers ({user.get('followers').size})
       </label>
@@ -13,8 +13,9 @@ const FeedControlls = ({ followers, following, me, toggleFeedParam, user }) => (
         name="followers"
         onClick={toggleFeedParam}
       />
-    </div>
-    <div className="col-xs-4 center">
+    </li>
+
+    <li>
       <label htmlFor="following">
         Include Following ({user.get('following').size})
       </label>
@@ -25,8 +26,8 @@ const FeedControlls = ({ followers, following, me, toggleFeedParam, user }) => (
         name="following"
         onClick={toggleFeedParam}
       />
-    </div>
-    <div className="col-xs-4 center">
+    </li>
+    <li>
       <label htmlFor="me">Include Me</label>
       <input
         id="me"
@@ -35,8 +36,8 @@ const FeedControlls = ({ followers, following, me, toggleFeedParam, user }) => (
         name="me"
         onClick={toggleFeedParam}
       />
-    </div>
-  </div>
+    </li>
+  </ul>
 )
 
 export default FeedControlls

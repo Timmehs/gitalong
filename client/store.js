@@ -31,12 +31,13 @@ export default function() {
     applyMiddleware(thunkMiddleware, logger)
   )
 
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const nextRootReducer = require('./reducers')
-      store.replaceReducer(nextRootReducer)
-    })
-  }
+  // Not sure if this is doing anything
+  // if (module.hot) {
+  //   module.hot.accept('./reducers', () => {
+  //     const nextRootReducer = require('./reducers')
+  //     store.replaceReducer(nextRootReducer)
+  //   })
+  // }
 
   return store
 }
