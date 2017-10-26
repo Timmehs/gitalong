@@ -6,23 +6,18 @@ import configureStore from './store'
 import './styles/main.scss'
 import Root from './components/Root'
 const rootEl = document.getElementById('main')
+const store = configureStore()
 
-render(
-  <AppContainer>
-    <Root store={configureStore()} />
-  </AppContainer>,
-  rootEl
-)
+function renderApp(component) {
+  render(<AppContainer>{component}</AppContainer>, rootEl)
+}
 
 if (module.hot) {
   module.hot.accept('./components/Root', () => {
+    require('./components/Root')
     try {
-      render(
-        <AppContainer>
-          <Root store={configureStore()} />
-        </AppContainer>,
-        rootEl
-      )
+      const nextComponent = <Root store={store} />
+      renderApp(nextComponent)
     } catch (e) {
       console.log('HMR Error')
       console.error(e)
@@ -31,3 +26,5 @@ if (module.hot) {
     }
   })
 }
+
+renderApp(<Root store={store} />)
