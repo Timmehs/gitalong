@@ -13,6 +13,22 @@ function getReposForUsers(userIds, currentUser, update = false) {
   }
 }
 
+/**
+ * For a given list of repos, return a count of languages
+ *
+ * @param {Repo[]}
+ * @returns {Object} dictionary of languages and their counts
+ */
+function getLanguageStats(repoList) {
+  return repoList.reduce((stats, { language }) => {
+    if (language) {
+      if (stats[language]) stats[language] += 1
+      else stats[language] = 1
+    }
+    return stats
+  }, {})
+}
+
 function repoQuery(userIds, opts = { page: 1 }) {
   return Repo.find({ owner: { $in: userIds } })
     .skip((opts.page - 1) * 25)
@@ -106,5 +122,6 @@ function upsertRepos(serializedRepos) {
 module.exports = {
   getReposForUsers,
   getReposForUser,
+  getLanguageStats,
   repoQuery
 }

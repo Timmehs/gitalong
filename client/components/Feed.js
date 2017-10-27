@@ -2,7 +2,14 @@ import React from 'react'
 import FeedControlls from './FeedControlls'
 import ReposContainer from 'client/containers/ReposContainer'
 
-const Feed = ({ followers, following, me, user, toggleFeedParam }) => (
+const Feed = ({
+  followers,
+  following,
+  me,
+  user,
+  toggleFeedParam,
+  languages
+}) => (
   <div className="col-xs-12">
     <div className="row">
       <div className="col-xs-12 col-md-8 first-md">
@@ -13,6 +20,7 @@ const Feed = ({ followers, following, me, user, toggleFeedParam }) => (
           followers={followers}
           following={following}
           me={me}
+          languages={languages}
           user={user}
           toggleFeedParam={toggleFeedParam}
         />

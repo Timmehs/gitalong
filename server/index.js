@@ -31,7 +31,7 @@ app.use(
 passportSetup(app)
 
 // Dev
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.HOT) {
   const webpackDevMiddleware = require('webpack-dev-middleware')
   const wpConfig = require('../webpack.config.js')
   const compiler = require('webpack')(wpConfig)

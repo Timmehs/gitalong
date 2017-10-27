@@ -4,7 +4,7 @@ import { refreshFeed } from 'client/actions'
 
 function mapStateToProps(state) {
   return {
-    repos: state.get('repos'),
+    repos: state.getIn(['repos', 'data']),
     fetchingRepos: state.getIn(['ui', 'loading', 'repos'], false)
   }
 }

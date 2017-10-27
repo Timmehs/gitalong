@@ -1,4 +1,9 @@
-import { SET_FEED_PARAMS, SET_REPOS, SET_LOADING } from './actions'
+import {
+  SET_FEED_PARAMS,
+  SET_REPOS,
+  SET_REPO_STAT,
+  SET_LOADING
+} from './actions'
 import { fromJS } from 'immutable'
 
 function user(action) {
@@ -25,7 +30,9 @@ function repos(action) {
   return function(state) {
     switch (action.type) {
       case SET_REPOS:
-        return fromJS(action.repos)
+        return state.set('data', fromJS(action.repos))
+      case SET_REPO_STAT:
+        return state.setIn(['stats', action.statName], fromJS(action.value))
       default:
         return state
     }

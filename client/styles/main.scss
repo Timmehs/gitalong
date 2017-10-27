@@ -31,6 +31,10 @@ ul {
   list-style: none;
 }
 
+.small {
+  font-size: 0.8rem;
+}
+
 .panel {
   padding: 2rem;
 }
@@ -41,4 +45,14 @@ ul {
 
 .centerFlex {
   justify-content: center;
+}
+
+a {
+  color: #444;
+  text-decoration: none;
+}
+
+a:hover {
+  transition: 1s;
+  text-decoration: underline;
 }

@@ -1,6 +1,13 @@
 import React from 'react'
 
-const FeedControlls = ({ followers, following, me, toggleFeedParam, user }) => (
+const FeedControlls = ({
+  followers,
+  following,
+  me,
+  toggleFeedParam,
+  user,
+  languages
+}) => (
   <ul className="feed-controlls">
     <li>
       <label htmlFor="followers">
@@ -37,6 +44,19 @@ const FeedControlls = ({ followers, following, me, toggleFeedParam, user }) => (
         onClick={toggleFeedParam}
       />
     </li>
+    {languages.entrySeq().map(([key, val]) => (
+      <li>
+        <label htmlFor={key + '-cb'}>
+          {key} ({val})
+        </label>
+        <input
+          id={key + '-cb'}
+          type="checkbox"
+          defaultChecked={true}
+          name={key}
+        />
+      </li>
+    ))}
   </ul>
 )
 

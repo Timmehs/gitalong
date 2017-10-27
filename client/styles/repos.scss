@@ -1,4 +1,17 @@
 .repo {
   background-color: whitesmoke;
   margin-bottom: 2rem;
+  & > * {
+    word-wrap: break-word;
+  }
+
+  .repo-meta * {
+    margin: 0;
+  }
+}
+
+.repo-avatar {
+  img {
+    border-radius: 15%;
+  }
 }

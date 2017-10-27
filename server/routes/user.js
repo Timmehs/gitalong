@@ -9,7 +9,8 @@ const {
 const {
   getReposForUser,
   getReposForUsers,
-  repoQuery
+  repoQuery,
+  getLanguageStats
 } = require('../services/repo-service')
 const Repo = require('../models/Repo')
 
@@ -52,7 +53,10 @@ router.get('/repos', ({ user, query }, res) => {
     )
   }
 
-  queryPromise.then(repos => res.send({ repos: repos }))
+  queryPromise.then(repos => {
+    const stats = getLanguageStats(repos)
+    res.send({ repos: repos, languages: stats })
+  })
 })
 
 module.exports = router

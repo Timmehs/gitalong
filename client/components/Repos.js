@@ -1,23 +1,12 @@
 import React, { Component } from 'react'
-
+import Repo from './Repo'
 class Repos extends Component {
   componentDidMount() {
     if (this.props.repos.size === 0) this.props.refreshFeed()
   }
 
   repoList = repos => {
-    return (
-      <ul>
-        {repos.map(repo => (
-          <li className="panel repo" style={{ listStyle: 'none' }}>
-            <h3>{repo.get('name')}</h3>
-            <p>{repo.get('ownerLogin')}</p>
-            <p>{repo.get('language')}</p>
-            <p>Stars: {repo.get('stargazersCount')}</p>
-          </li>
-        ))}
-      </ul>
-    )
+    return <ul>{repos.map(repo => <Repo repo={repo} />)}</ul>
   }
 
   loadingState = fetching => {

@@ -17,7 +17,10 @@ function initializeState() {
       followers: true,
       me: true
     },
-    repos: [],
+    repos: {
+      data: [],
+      stats: {}
+    },
     ui: {
       loading: {}
     }
