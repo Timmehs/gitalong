@@ -9,7 +9,7 @@ function buildUserParameters(accessToken, data) {
     login: data.login,
     name: data.name,
     lastLogin: Date.now(),
-    githubId: data.id,
+    githubId: parseInt(data.id),
     githubUrl: data.html_url,
     avatarUrl: data.avatar_url
   }
@@ -37,12 +37,12 @@ const passportSetup = function(app) {
         callbackURL: config.GITHUB_CALLBACK_URL
       },
       function(accessToken, refreshToken, profile, done) {
-        const githubId = profile.id
+        const serializedUser = buildUserParameters(accessToken, profile._json)
         const options = { upsert: true, passRawResult: true, new: true }
 
         User.findOneAndUpdate(
-          githubId,
-          buildUserParameters(accessToken, profile._json),
+          { githubId: serializedUser.githubId },
+          serializedUser,
           options,
           function(err, doc, raw) {
             if (err) {

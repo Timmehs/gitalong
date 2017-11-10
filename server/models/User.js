@@ -13,7 +13,7 @@ const userSchema = new Schema({
   githubUrl: String,
   login: { type: String, index: { unique: true } },
   lastLogin: Date,
-  githubId: { type: String, index: { unique: true } },
+  githubId: { type: Number, index: { unique: true } },
   accessToken: String,
   following: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   followingEtag: String,
