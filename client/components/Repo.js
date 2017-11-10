@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import LanguageIcon from './LanguageIcon'
 
 const Repo = ({ repo }) => (
   <li
@@ -23,9 +24,16 @@ const Repo = ({ repo }) => (
       </div>
       <div className="col-xs-3">
         <div className="repo-meta small">
-          {repo.get('language') && <p>Language: {repo.get('language')}</p>}
-          <p>Stars: {repo.get('stargazersCount')}</p>
-          <p>last push was {moment(repo.get('pushedAt')).fromNow()}</p>
+          {repo.get('language') && (
+            <LanguageIcon lang={repo.get('language', '')} />
+          )}
+          <p>
+            <i className="fa fa-star" aria-hidden="true" />
+            {repo.get('stargazersCount')}
+          </p>
+          <p className="small">
+            last push {moment(repo.get('pushedAt')).fromNow()}
+          </p>
         </div>
       </div>
     </div>

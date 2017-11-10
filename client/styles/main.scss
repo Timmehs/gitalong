@@ -1,29 +1,12 @@
 @import '~flexboxgrid/dist/flexboxgrid.min.css';
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome';
+@import './layout';
+@import './typography';
 @import './container';
 @import './feed-controlls';
 @import './repos';
-
-header {
-  height: 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: whitesmoke;
-  margin-bottom: 2rem;
-  padding: 0 2rem;
-}
-
-header h1 {
-  display: inline-block;
-}
-
-html {
-  font-size: 16px;
-}
-body {
-  margin: 0;
-  color: #444;
-}
+@import './components/index';
 
 ul {
   margin: 0;
