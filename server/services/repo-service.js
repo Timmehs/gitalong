@@ -29,9 +29,10 @@ function getLanguageStats(repoList) {
   }, {})
 }
 
-function repoQuery(userIds, opts = { page: 1 }) {
-  return Repo.find({ owner: { $in: userIds } })
-    .skip((opts.page - 1) * 25)
+function repoQuery(opts) {
+  const page = opts.page || 1
+  return Repo.find({ owner: { $in: opts.ids } })
+    .skip((page - 1) * 25)
     .limit(25)
     .sort({ pushedAt: -1 })
     .populate('owner')

@@ -43,13 +43,17 @@ function getRequiredIds(query, user) {
 
 router.get('/repos', ({ user, query }, res) => {
   const minutesSinceSync = elapsedTime(user.lastSyncedAt, 'm')
+  
   if (minutesSinceSync && minutesSinceSync < 10) {
     console.log(`Skipping sync (Sync was ${minutesSinceSync}m ago)`)
-    queryPromise = repoQuery(getRequiredIds(query, user))
+    queryPromise = repoQuery({
+      ids: getRequiredIds(query, user),
+      params: query
+    })
   } else {
     console.log('Syncing with Github..')
     queryPromise = fullCommunitySync(user).then(() =>
-      repoQuery(getRequiredIds(query, user))
+      repoQuery({ ids: getRequiredIds(query, user) })
     )
   }
 
