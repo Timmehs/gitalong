@@ -8,53 +8,43 @@ const FeedControlls = ({
   user,
   languages
 }) => (
-  <ul className="feed-controlls">
+  <ul className="filter-list">
     <li>
-      <label htmlFor="followers">
-        Include Followers ({user.get('followers').size})
-      </label>
-      <input
-        id="followers"
-        type="checkbox"
-        defaultChecked={followers}
-        name="followers"
-        onClick={toggleFeedParam}
-      />
+      <a
+        href="#"
+        className={`filter-item ${followers && ' selected'}`}
+        onClick={() => toggleFeedParam('followers', !followers)}
+      >
+        <span className="count">{user.get('followers').size}</span>
+        Followers
+      </a>
+    </li>
+    <li>
+      <a
+        href="#"
+        className={`filter-item ${following && ' selected'}`}
+        onClick={() => toggleFeedParam('following', !following)}
+      >
+        <span className="count">{user.get('following').size}</span>
+        Following
+      </a>
     </li>
 
     <li>
-      <label htmlFor="following">
-        Include Following ({user.get('following').size})
-      </label>
-      <input
-        id="following"
-        type="checkbox"
-        defaultChecked={following}
-        name="following"
-        onClick={toggleFeedParam}
-      />
-    </li>
-    <li>
-      <label htmlFor="me">Include Me</label>
-      <input
-        id="me"
-        type="checkbox"
-        defaultChecked={me}
-        name="me"
-        onClick={toggleFeedParam}
-      />
+      <a
+        href="#"
+        className={`filter-item ${me && ' selected'}`}
+        onClick={() => toggleFeedParam('me', !me)}
+      >
+        Me
+      </a>
     </li>
     {languages.entrySeq().map(([key, val]) => (
-      <li>
-        <label htmlFor={key + '-cb'}>
-          {key} ({val})
-        </label>
-        <input
-          id={key + '-cb'}
-          type="checkbox"
-          defaultChecked={true}
-          name={key}
-        />
+      <li key={key}>
+        <a href="#" className={`filter-item ${true && ' selected'}`}>
+          <span className="count">{val}</span>
+          {key}
+        </a>
       </li>
     ))}
   </ul>

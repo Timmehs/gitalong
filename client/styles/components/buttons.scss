@@ -1,9 +1,5 @@
-// .btn {
-// }
-//
-// .btn-small {
-//   font-size: $textSmall;
-// }
-
-.icon-btn {
+button {
+  & > i {
+    margin-right: 0.5rem;
+  }
 }

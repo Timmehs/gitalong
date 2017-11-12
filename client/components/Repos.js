@@ -5,30 +5,32 @@ class Repos extends Component {
     if (this.props.repos.size === 0) this.props.refreshFeed()
   }
 
-  repoList = repos => {
-    return <ul>{repos.map(repo => <Repo repo={repo} />)}</ul>
-  }
+  repoList = repos => repos.map(repo => <Repo repo={repo} />)
 
   loadingState = fetching => {
     const text = fetching ? 'Gathering data...' : 'No repositories to show'
     return (
-      <div className="panel center">
-        <h2>
-          {text}
-          {fetching && <div className="loader" />}
-        </h2>
-      </div>
+      <li className="panel repo">
+        <div className="row">
+          <div className="col-xs-12">
+            <h2>
+              {text}
+              {fetching && <div className="loader" />}
+            </h2>
+          </div>
+        </div>
+      </li>
     )
   }
 
   render() {
     const { repos, fetchingRepos } = this.props
     return (
-      <div>
+      <ul>
         {this.props.repos.size === 0
           ? this.loadingState(fetchingRepos)
           : this.repoList(repos)}
-      </div>
+      </ul>
     )
   }
 }

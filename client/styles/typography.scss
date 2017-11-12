@@ -12,6 +12,21 @@ body {
   font-size: $textNormal;
 }
 
+a {
+  color: $lightTextColor;
+  text-decoration: none;
+}
+
+a:hover {
+  transition: 200ms;
+  color: $textColor;
+}
+
+p {
+  font-size: $textNormal;
+}
+
+// Helper Classes
 .small {
   font-size: $textSmall;
 }
@@ -22,4 +37,8 @@ body {
 
 .large {
   font-size: $textLarge;
+}
+
+.light-text {
+  color: $lightTextColor;
 }
