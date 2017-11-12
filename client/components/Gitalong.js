@@ -6,12 +6,14 @@ const Gitalong = ({ user }) => (
     <header>
       <h2 className="header-brand">gitalong</h2>
       {user ? (
-        <a href="/auth/logout">{`Log out ${user.get('login')}`}</a>
+        <a href="/auth/logout">
+          <i className="fa fa-sign-out" />
+        </a>
       ) : (
         <a href="/auth/github">Login with GitHub</a>
       )}
     </header>
-    <div className="row container">{user && <FeedContainer />}</div>
+    <div className="container">{user && <FeedContainer />}</div>
   </main>
 )
 

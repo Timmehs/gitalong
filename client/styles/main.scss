@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
-
 @import '~flexboxgrid/dist/flexboxgrid.min.css';
 $fa-font-path: '~font-awesome/fonts';
 @import '~font-awesome/scss/font-awesome';
+
+@import './variables';
 @import './layout';
 @import './typography';
-@import './container';
-@import './feed-controlls';
-@import './repos';
 @import './components/index';
 
 ul {
@@ -16,28 +14,27 @@ ul {
   list-style: none;
 }
 
-.small {
-  font-size: 0.8rem;
+.vertical-center {
+  display: flex;
+  align-items: center;
 }
 
-.panel {
-  padding: 2rem;
-}
-
-.center {
-  text-align: center;
-}
-
-.centerFlex {
-  justify-content: center;
+.align-right {
+  text-align: right;
 }
 
 a {
   color: #444;
+  font-size: $textNormal;
   text-decoration: none;
 }
 
 a:hover {
   transition: 1s;
   text-decoration: underline;
+  color: #000;
+}
+
+p {
+  font-size: $textNormal;
 }
