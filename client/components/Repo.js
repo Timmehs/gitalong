@@ -13,21 +13,25 @@ const Repo = ({ repo }) => (
       </div>
       <div className="col-xs-8">
         <div className="repo-meta">
-          <h3>
+          <h2>
             <a href={repo.get('htmlUrl')}>{repo.get('name')}</a>
-          </h3>
+          </h2>
           <a href={repo.getIn(['owner', 'githubUrl'])}>
             {repo.getIn(['owner', 'login'])}
           </a>
         </div>
-        <p>{repo.get('description')}</p>
       </div>
-      <div className="col-xs-3">
-        <div className="repo-meta">
-          {repo.get('language') && (
-            <LanguageIcon lang={repo.get('language', '')} />
-          )}
-        </div>
+      <div className="col-xs-3 align-right">
+        {repo.get('language') && (
+          <LanguageIcon lang={repo.get('language', '')} />
+        )}
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-xs-6">
+        <p>
+          {repo.get('description', null) && <p>{repo.get('description')}</p>}
+        </p>
         <div className="repo-meta">
           <button className="btn btn-small btn-icon">
             <i className="fa fa-star" aria-hidden="true" />

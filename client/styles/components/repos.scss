@@ -1,6 +1,4 @@
 .repo {
-  background-color: whitesmoke;
-  margin-bottom: 2rem;
   & > * {
     word-wrap: break-word;
   }
@@ -8,13 +6,13 @@
     margin-bottom: 0.5rem;
   }
 
-  .repo-meta * {
+  .repo-meta > * {
     margin: 0;
   }
 }
 
 .repo-avatar {
   img {
-    border-radius: 15%;
+    border-radius: $borderRadius;
   }
 }
