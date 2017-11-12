@@ -16,8 +16,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // For checkbox params
-    toggleFeedParam: ({ target }) => {
-      dispatch(setFeedParams({ [target.name]: target.checked }))
+    toggleFeedParam: (param, newState) => {
+      dispatch(setFeedParams({ [param]: newState }))
       dispatch(refreshFeed())
     }
   }

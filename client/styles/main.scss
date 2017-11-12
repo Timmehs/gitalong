@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:700');
 @import '~flexboxgrid/dist/flexboxgrid.min.css';
+@import '~primer-css/index.scss';
 $fa-font-path: '~font-awesome/fonts';
 @import '~font-awesome/scss/font-awesome';
-
 @import './variables';
 @import './layout';
 @import './typography';
@@ -19,22 +19,10 @@ ul {
   align-items: center;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .align-right {
   text-align: right;
-}
-
-a {
-  color: #444;
-  font-size: $textNormal;
-  text-decoration: none;
-}
-
-a:hover {
-  transition: 1s;
-  text-decoration: underline;
-  color: #000;
-}
-
-p {
-  font-size: $textNormal;
 }

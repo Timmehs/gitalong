@@ -8,18 +8,25 @@ const Repo = ({ repo }) => (
     style={{ listStyle: 'none' }}
   >
     <div className="row">
-      <div className="col-xs-1 repo-avatar">
-        <img src={repo.getIn(['owner', 'avatarUrl'])} width="100%" />
+      <div className="col-xs-1 vertical-center">
+        <img
+          src={repo.getIn(['owner', 'avatarUrl'])}
+          className="avatar"
+          width="100%"
+        />
       </div>
-      <div className="col-xs-8">
-        <div className="repo-meta">
-          <h2>
-            <a href={repo.get('htmlUrl')}>{repo.get('name')}</a>
-          </h2>
-          <a href={repo.getIn(['owner', 'githubUrl'])}>
-            {repo.getIn(['owner', 'login'])}
+      <div className="col-xs-8 repo-meta">
+        <span className="xsmall">
+          last push {moment(repo.get('pushedAt')).fromNow()}
+        </span>
+        <h2 className="no-margin">
+          <a className="xlarge" href={repo.get('htmlUrl')}>
+            {repo.get('name')}
           </a>
-        </div>
+        </h2>
+        <a className="small" href={repo.getIn(['owner', 'githubUrl'])}>
+          {repo.getIn(['owner', 'login'])}
+        </a>
       </div>
       <div className="col-xs-3 align-right">
         {repo.get('language') && (
@@ -28,21 +35,8 @@ const Repo = ({ repo }) => (
       </div>
     </div>
     <div className="row">
-      <div className="col-xs-6">
-        <p>
-          {repo.get('description', null) && <p>{repo.get('description')}</p>}
-        </p>
-        <div className="repo-meta">
-          <button className="btn btn-small btn-icon">
-            <i className="fa fa-star" aria-hidden="true" />
-            {repo.get('stargazersCount')}
-          </button>
-        </div>
-        <div className="repo-meta">
-          <p className="small">
-            last push {moment(repo.get('pushedAt')).fromNow()}
-          </p>
-        </div>
+      <div className="col-xs-9">
+        <p>{repo.get('description')}</p>
       </div>
     </div>
   </li>
