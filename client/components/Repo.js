@@ -23,14 +23,18 @@ const Repo = ({ repo }) => (
         <p>{repo.get('description')}</p>
       </div>
       <div className="col-xs-3">
-        <div className="repo-meta small">
+        <div className="repo-meta">
           {repo.get('language') && (
             <LanguageIcon lang={repo.get('language', '')} />
           )}
-          <p>
+        </div>
+        <div className="repo-meta">
+          <button className="btn btn-small btn-icon">
             <i className="fa fa-star" aria-hidden="true" />
             {repo.get('stargazersCount')}
-          </p>
+          </button>
+        </div>
+        <div className="repo-meta">
           <p className="small">
             last push {moment(repo.get('pushedAt')).fromNow()}
           </p>
