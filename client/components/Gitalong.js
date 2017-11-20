@@ -2,7 +2,7 @@ import React from 'react'
 import FeedContainer from 'client/containers/FeedContainer'
 
 const Gitalong = ({ user }) => (
-  <main>
+  <main className='container'>
     <header>
       <h2 className="header-brand">gitalong</h2>
       {user ? (
