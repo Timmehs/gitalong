@@ -13,39 +13,23 @@ const Feed = ({
   <div className="col-xs-12">
     <div className="row">
       <div className="col-xs-12 col-md-8 first-md">
-        <nav className="UnderlineNav">
+        <nav className="UnderlineNav" style={{ marginBottom: '1.5rem' }}>
           <div className="UnderlineNav-body">
             <a
-              href="#url"
+              href="/"
               role="tab"
-              title="Item 1"
+              title="Following"
               className="UnderlineNav-item selected"
             >
-              Item 1
+              Following
             </a>
             <a
-              href="#url"
+              href="/followers"
               role="tab"
-              title="Item 2"
+              title="Followers"
               className="UnderlineNav-item"
             >
-              Item 2
-            </a>
-            <a
-              href="#url"
-              role="tab"
-              title="Item 3"
-              className="UnderlineNav-item"
-            >
-              Item 3
-            </a>
-            <a
-              href="#url"
-              role="tab"
-              title="Item 4"
-              className="UnderlineNav-item"
-            >
-              Item 4
+              Followers
             </a>
           </div>
         </nav>

@@ -27,47 +27,6 @@ const FeedControlls = ({
   languages
 }) => (
   <ul>
-    <li>
-      <div className="form-checkbox">
-        <label>
-          <input
-            type="checkbox"
-            checked={followers}
-            name="followers"
-            onClick={toggleFeedParam}
-          />
-          Followers
-        </label>
-        <p className="note">Include repos of users who follow you.</p>
-      </div>
-
-      <div className="form-checkbox">
-        <label>
-          <input
-            type="checkbox"
-            checked={following}
-            name="following"
-            onClick={toggleFeedParam}
-          />
-          Following
-        </label>
-        <p className="note">Include repos of users you are following.</p>
-      </div>
-
-      <div className="form-checkbox">
-        <label>
-          <input
-            type="checkbox"
-            checked={me}
-            name="me"
-            onClick={toggleFeedParam}
-          />
-          Me
-        </label>
-        <p className="note">Show my repos.</p>
-      </div>
-    </li>
-
     <LanguageWidget languages={languages} />
   </ul>
 )
