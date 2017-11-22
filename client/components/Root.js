@@ -1,9 +1,12 @@
 import { Provider } from 'react-redux'
 import GitalongContainer from 'client/containers/GitalongContainer'
-// Eventually add router config here
+import { BrowserRouter as Router, Route } from 'react-router'
+
 const Root = ({ store }) => (
   <Provider store={store}>
-    <GitalongContainer />
+    <Router>
+      <Route path="/:filter?" component={GitalongContainer} />
+    </Router>
   </Provider>
 )
 
