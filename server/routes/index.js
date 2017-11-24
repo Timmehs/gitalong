@@ -2,6 +2,7 @@ const router = require('express').Router()
 // User may be null when not logged in
 router.get('/', (req, res) => {
   const { user } = req
+  console.log('werps')
   if (user) {
     user
       .populate('followers following')

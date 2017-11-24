@@ -9,6 +9,37 @@
   }
 }
 
+@keyframes blurOut {
+  0% {
+    filter: blur(0);
+  }
+  100% {
+    filter: blur(20px);
+  }
+}
+
+@keyframes blurIn {
+  0% {
+    filter: blur(20px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+
+.repos-list {
+  position: relative;
+  z-index: 1;
+  filter: blur(0);
+
+  &.loading-repos {
+    animation: blurOut 3s;
+  }
+}
+
+.repos-list.loading-repos::after {
+}
+
 .repo-avatar {
   img {
     border-radius: $borderRadius;
