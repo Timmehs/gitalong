@@ -2,35 +2,34 @@ import React, { Component } from 'react'
 import Repo from './Repo'
 
 class Repos extends Component {
-  componentDidMount() {
-    if (this.props.repos.size === 0) this.props.refreshFeed()
+  componentWillMount() {
+    this.props.refreshFeed(this.props.filter || 'following')
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.filter !== nextProps.filter) {
+      const filterName = nextProps.filter ? nextProps.filter : 'following'
+      this.props.refreshFeed(filterName)
+    }
   }
 
   repoList = repos => repos.map(repo => <Repo repo={repo} />)
 
-  loadingState = fetching => {
-    const text = fetching ? 'Gathering data...' : 'No repositories to show'
-    return (
-      <div className="blankslate">
-        <h3>
-          <i
-            className="fa fa-spinner fa-pulse fa-2x fa-fw"
-            style={{ marginBottom: '1rem' }}
-          />
-        </h3>
-        <span className="sr-only">Loading...</span>
-        <h3>{text}</h3>
-      </div>
-    )
-  }
-
   render() {
     const { repos, fetchingRepos } = this.props
+    const showLoadingState = this.props.repos.size === 0
     return (
-      <ul>
-        {this.props.repos.size === 0
-          ? this.loadingState(fetchingRepos)
-          : this.repoList(repos)}
+      <ul className={`repos-list ${fetchingRepos && ' loading-repos'}`}>
+        {showLoadingState ? (
+          <div className="blankslate">
+            <h3>
+              <i class="fa fa-code-fork" aria-hidden="true" />
+            </h3>
+            <h3>No repositories to show</h3>
+          </div>
+        ) : (
+          this.repoList(repos)
+        )}
       </ul>
     )
   }

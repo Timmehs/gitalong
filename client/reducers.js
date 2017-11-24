@@ -58,12 +58,4 @@ function combineReducers(reducers) {
   }
 }
 
-// function reducer(state, action) {
-//   return state
-//     .update(feedParams(action))
-//     .update(repos(action))
-//     .update(user(action))
-//     .update(ui(action))
-// }
-
 export default combineReducers({ user, ui, repos, feedParams })

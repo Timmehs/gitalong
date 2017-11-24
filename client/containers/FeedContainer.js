@@ -3,26 +3,16 @@ import Feed from '../components/Feed'
 import { refreshFeed, setFeedParams } from '../actions'
 import { Map as ImmMap } from 'immutable'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { filter }) {
   return {
-    following: state.getIn(['feedParams', 'following']),
-    followers: state.getIn(['feedParams', 'followers']),
+    filter,
     user: state.get('user'),
-    me: state.getIn(['feedParams', 'me']),
     languages: state.getIn(['repos', 'stats', 'languages'], new ImmMap())
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    // For checkbox params
-    toggleFeedParam: (e) => {
-      const param = e.target.name
-      const value = e.target.checked
-      dispatch(setFeedParams({ [param]: value }))
-      dispatch(refreshFeed())
-    }
-  }
+  return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed)

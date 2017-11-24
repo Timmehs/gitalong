@@ -55,9 +55,10 @@ app.set('view engine', 'pug')
 app.use(express.static(process.cwd() + '/public'))
 
 /* Routes */
-app.use('/', require('./routes/index'))
 app.use('/user', require('./routes/user'))
+app.use('/repos', require('./routes/repos'))
 app.use('/auth', require('./routes/authentication'))
+app.use('/', require('./routes/index'))
 
 app.listen(port, function(error) {
   console.log('Express server running on port ' + port)

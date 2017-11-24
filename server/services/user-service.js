@@ -103,7 +103,16 @@ function buildAndSaveUsers(usersJSON) {
   })
 }
 
+function getRequiredIds(query, user) {
+  const ids = ['following', 'followers'].reduce(function(result, param) {
+    return query[param] ? result.concat(user[param]) : result
+  }, [])
+
+  return dedupeIDs(ids)
+}
+
 module.exports = {
   updateAssociatedUsers,
-  fullCommunitySync
+  fullCommunitySync,
+  getRequiredIds
 }

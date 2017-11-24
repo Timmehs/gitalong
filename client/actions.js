@@ -21,14 +21,18 @@ export function setLoading(uiKey, isLoading) {
   return { type: SET_LOADING, uiKey, isLoading }
 }
 
-export function refreshFeed() {
+export function refreshFeed(filter) {
+  const filters = {
+    following: '?following=true',
+    followers: '?followers=true'
+  }
   return function(dispatch, getState) {
     const currentParams = getState().get('feedParams')
-    const feedQuery = feedQueryString(currentParams)
+    const feedQuery = filters[filter] || ''
 
     dispatch(setLoading('repos', true))
 
-    get('/user/repos' + feedQuery).then(data => {
+    get('/repos' + feedQuery).then(data => {
       dispatch(setLoading('repos', false))
       dispatch(setRepos(data.repos))
       dispatch(setRepoStat('languages', data.languages))

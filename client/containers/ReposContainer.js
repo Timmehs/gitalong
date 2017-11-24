@@ -2,8 +2,9 @@ import { connect } from 'react-redux'
 import Repos from 'client/components/Repos'
 import { refreshFeed } from 'client/actions'
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { filter }) {
   return {
+    filter,
     repos: state.getIn(['repos', 'data']),
     fetchingRepos: state.getIn(['ui', 'loading', 'repos'], false)
   }
@@ -11,7 +12,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    refreshFeed: () => dispatch(refreshFeed())
+    refreshFeed: filter => dispatch(refreshFeed(filter))
   }
 }
 

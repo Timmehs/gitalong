@@ -1,49 +1,39 @@
 import React from 'react'
-import FeedControlls from './FeedControlls'
+import LanguageList from './LanguageList'
 import ReposContainer from 'client/containers/ReposContainer'
+import { NavLink } from 'react-router-dom'
 
-const Feed = ({
-  followers,
-  following,
-  me,
-  user,
-  toggleFeedParam,
-  languages
-}) => (
+const Feed = ({ user, filter, languages }) => (
   <div className="col-xs-12">
     <div className="row">
       <div className="col-xs-12 col-md-8 first-md">
         <nav className="UnderlineNav" style={{ marginBottom: '1.5rem' }}>
           <div className="UnderlineNav-body">
-            <a
-              href="/"
+            <NavLink
+              exact
+              to="/"
               role="tab"
               title="Following"
-              className="UnderlineNav-item selected"
+              activeClassName="selected"
+              className="UnderlineNav-item"
             >
               Following
-            </a>
-            <a
-              href="/followers"
+            </NavLink>
+            <NavLink
+              to="/followers"
               role="tab"
               title="Followers"
+              activeClassName="selected"
               className="UnderlineNav-item"
             >
               Followers
-            </a>
+            </NavLink>
           </div>
         </nav>
-        <ReposContainer />
+        <ReposContainer filter={filter} />
       </div>
       <div className="col-xs-12 col-md-3 col-md-offset-1 first-xs">
-        <FeedControlls
-          followers={followers}
-          following={following}
-          me={me}
-          languages={languages}
-          user={user}
-          toggleFeedParam={toggleFeedParam}
-        />
+        <LanguageList languages={languages} />
       </div>
     </div>
   </div>

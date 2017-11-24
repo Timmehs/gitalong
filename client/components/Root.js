@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import GitalongContainer from 'client/containers/GitalongContainer'
-import { BrowserRouter as Router, Route } from 'react-router'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 const Root = ({ store }) => (
   <Provider store={store}>

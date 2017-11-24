@@ -1,8 +1,8 @@
 import React from 'react'
 import FeedContainer from 'client/containers/FeedContainer'
 
-const Gitalong = ({ user }) => (
-  <main className='container'>
+const Gitalong = ({ user, feedFilter }) => (
+  <main className="container">
     <header>
       <h2 className="header-brand">gitalong</h2>
       {user ? (
@@ -13,7 +13,9 @@ const Gitalong = ({ user }) => (
         <a href="/auth/github">Login with GitHub</a>
       )}
     </header>
-    <div className="container">{user && <FeedContainer />}</div>
+    <div className="container">
+      {user && <FeedContainer filter={feedFilter} />}
+    </div>
   </main>
 )
 
