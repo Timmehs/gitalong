@@ -23,7 +23,7 @@ class Repos extends Component {
         {showLoadingState ? (
           <div className="blankslate">
             <h3>
-              <i class="fa fa-code-fork" aria-hidden="true" />
+              <i className="fa fa-code-fork" aria-hidden="true" />
             </h3>
             <h3>No repositories to show</h3>
           </div>

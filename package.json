@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --inspect server/index.js",
-    "hot": "HOT=true node --inspect server/index.js",
+    "dev": "HOT=false webpack -p && nodemon --inspect server/index.js",
+    "hot": "HOT=true node server/index.js",
     "build": "webpack"
   },
   "dependencies": {
@@ -47,6 +47,14 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
+    "eslint": "^4.11.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-jsx": "^4.0.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
     "file-loader": "^1.1.5",
     "node-sass": "^4.5.3",
     "nodemon": "^1.18.4",

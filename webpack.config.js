@@ -5,11 +5,11 @@ module.exports = {
   entry: [
     'react-hot-loader/patch',
     'webpack-hot-middleware/client',
-    __dirname + '/client/app.js'
+    path.resolve(__dirname, 'client/app.js')
   ],
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/public',
+    path: path.resolve(__dirname, 'public'),
     publicPath: ''
   },
   resolve: {
@@ -43,7 +43,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [__dirname + '/node_modules']
+              includePaths: [path.resolve(__dirname, 'node_modules')]
             }
           }
         ]

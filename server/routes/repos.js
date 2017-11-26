@@ -1,9 +1,4 @@
-const {
-  getReposForUser,
-  getReposForUsers,
-  repoQuery,
-  getLanguageStats
-} = require('../services/repo-service')
+const { repoQuery, getLanguageStats } = require('../services/repo-service')
 const elapsedTime = require('../lib/elapsedTime')
 
 const router = require('express').Router()
@@ -15,7 +10,7 @@ const {
 
 router.get('/', ({ user, query }, res) => {
   const minutesSinceSync = elapsedTime(user.lastSyncedAt, 'm')
-
+  let queryPromise
   if (minutesSinceSync && minutesSinceSync < 10) {
     console.log(`Skipping sync (Sync was ${minutesSinceSync}m ago)`)
     queryPromise = repoQuery({
