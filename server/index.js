@@ -29,20 +29,7 @@ app.use(
 passportSetup(app)
 
 // Dev
-if (process.env.HOT) {
-  const webpackDevMiddleware = require('webpack-dev-middleware')
-  const wpConfig = require('../webpack.config.js')
-  const compiler = require('webpack')(wpConfig)
-  app.use(
-    webpackDevMiddleware(compiler, {
-      publicPath: wpConfig.output.publicPath,
-      stats: {
-        colors: true
-      }
-    })
-  )
-  app.use(require('webpack-hot-middleware')(compiler))
-}
+if (process.env.HOT) require('./hot-middleware.js')(app)
 
 // TODO: Remove this and serve a static index.html in public
 app.set('views', process.cwd() + '/server/views')
