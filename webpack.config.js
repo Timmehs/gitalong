@@ -1,10 +1,11 @@
 const path = require('path')
 const webpack = require('webpack')
+
 module.exports = {
   context: __dirname,
   entry: [
+    'webpack-hot-middleware/client?reload=true',
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client',
     path.resolve(__dirname, 'client/app.js')
   ],
   output: {
@@ -20,6 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
   devtool: 'source-maps',

@@ -1,6 +1,7 @@
 import React from 'react'
 
 const languageClass = language => {
+  if (language === undefined) return 'github'
   const conversions = {
     HTML: 'html5',
     CSS: 'css3'
@@ -8,10 +9,12 @@ const languageClass = language => {
   return conversions[language] || language.toLowerCase()
 }
 
-const LanguageIcon = ({ lang }) => (
+const LanguageIcon = ({ language }) => (
   <i
-    className={`language-icon devicon-${languageClass(lang)}-plain colored`}
-    title={lang}
+    className={`language-icon devicon-${languageClass(
+      language
+    )}-plain colored mr-1`}
+    title={language}
   />
 )
 
