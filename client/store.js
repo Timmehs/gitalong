@@ -1,7 +1,6 @@
 import { fromJS } from 'immutable'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
-import { applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import logger from './logger'
 
@@ -33,14 +32,6 @@ export default function() {
     initializeState(),
     applyMiddleware(thunkMiddleware, logger)
   )
-
-  // Not sure if this is doing anything
-  // if (module.hot) {
-  //   module.hot.accept('./reducers', () => {
-  //     const nextRootReducer = require('./reducers')
-  //     store.replaceReducer(nextRootReducer)
-  //   })
-  // }
 
   return store
 }
