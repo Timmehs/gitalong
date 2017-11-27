@@ -1,7 +1,6 @@
 import React from 'react'
 import { AppContainer } from 'react-hot-loader'
 import { render } from 'react-dom'
-import reducers from './reducers'
 import configureStore from './store'
 import './styles/main.scss'
 import Root from './components/Root'
