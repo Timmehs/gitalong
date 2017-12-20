@@ -37,7 +37,7 @@ function repoQuery(opts) {
     .sort({ pushedAt: -1 })
     .populate('owner')
     .select(
-      'name githubId pushedAt createdAt language stargazersCount htmlUrl owner description ownerLogin'
+      'name githubId pushedAt createdAt language stargazersCount htmlUrl owner description ownerLogin topics'
     )
 }
 
@@ -88,6 +88,7 @@ function serializeRepo(repoJSON, user) {
     owner: user._id,
     pushedAt: repoJSON.pushed_at,
     createdAt: repoJSON.created_at,
+    topics: repoJSON.topics,
     stargazersCount: repoJSON.stargazers_count,
     watchers: repoJSON.watchers,
     htmlUrl: repoJSON.html_url,
