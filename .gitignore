@@ -1,7 +1,4 @@
 node_modules
-dist/bundle.js
+public
 .DS_Store
 server/config/.config.js
-public/bundle.js
-public/bundle.js.map
-public/*.hot-update.json
