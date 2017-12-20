@@ -40,12 +40,10 @@ const Repo = ({ repo }) => (
                 {repo.get('language')}
               </span>
             )}
-            {repo.get('stargazersCount', 0) > 0 && (
-              <span className="mr-3" style={{ display: 'inline-block' }}>
-                <i className="fa fa-star mr-1" />
-                {repo.get('stargazersCount')}
-              </span>
-            )}
+            <span className="mr-3" style={{ display: 'inline-block' }}>
+              <i className="fa fa-star mr-1" />
+              {repo.get('stargazersCount')}
+            </span>
             <span className="mr-3" style={{ display: 'inline-block' }}>
               Updated {moment(repo.get('pushedAt')).fromNow()}
             </span>
