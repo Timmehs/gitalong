@@ -38,20 +38,7 @@ app.set('view engine', 'pug')
 
 // Serve static assets
 app.use(express.static(process.cwd() + '/public'))
-
-/* Check request type */
-app.use(function(req, res, next) {
-  const headers = req.headers
-  switch (headers['content-type']) {
-    case 'application/json':
-      next()
-      break
-    default:
-      req.url = '/'
-      next()
-      break
-  }
-})
+  
 /* Routes */
 app.use('/user', require('./routes/user'))
 app.use('/repos', require('./routes/repos'))
