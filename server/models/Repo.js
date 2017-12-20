@@ -18,6 +18,7 @@ const repoSchema = new Schema({
   htmlUrl: String,
   description: String,
   ownerLogin: String,
+  topics: [String],
   owner: { type: Schema.Types.ObjectId, ref: 'User', index: true }
 })
 

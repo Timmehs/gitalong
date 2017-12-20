@@ -15,7 +15,7 @@ function github(user) {
     Promise: require('bluebird'),
     protocol: 'https',
     headers: {
-      Accept: 'application/vnd.github.v3+json',
+      Accept: 'application/vnd.github.mercy-preview+json',
       Authorization: `token ${user.accessToken}`,
       'user-agent': 'Timmehs'
     },
