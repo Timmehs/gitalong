@@ -24,7 +24,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
-  devtool: 'source-maps',
+  devtool: 'cheap-eval-source-maps',
   module: {
     rules: [
       {
@@ -32,9 +32,6 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['env', 'react', 'stage-0']
-          }
         }
       },
       {
