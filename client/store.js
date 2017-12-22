@@ -1,4 +1,5 @@
 import { fromJS } from 'immutable'
+import buildCompose from './util/redux-devtools-setup'
 import { createStore, applyMiddleware } from 'redux'
 import reducers from './reducers'
 import thunkMiddleware from 'redux-thunk'
@@ -30,7 +31,7 @@ export default function() {
   const store = createStore(
     reducers,
     initializeState(),
-    applyMiddleware(thunkMiddleware, logger)
+    buildCompose(process.env.NODE_ENV)(applyMiddleware(thunkMiddleware, logger))
   )
 
   return store
