@@ -38,7 +38,7 @@ app.set('view engine', 'pug')
 
 // Serve static assets
 app.use(express.static(process.cwd() + '/public'))
-  
+
 /* Routes */
 app.use('/user', require('./routes/user'))
 app.use('/repos', require('./routes/repos'))
