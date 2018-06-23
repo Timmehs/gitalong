@@ -6,4 +6,8 @@
   border: 1px solid #e5e5e5;
   border-radius: $borderRadius;
   margin-bottom: 2rem;
+
+  &.no-border {
+    border: none;
+  }
 }

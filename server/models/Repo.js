@@ -8,6 +8,7 @@ const repoSchema = new Schema({
   createdAt: Date,
   language: String,
   stargazersCount: Number,
+  forksCount: Number,
   htmlUrl: String,
   description: String,
   ownerLogin: String,
