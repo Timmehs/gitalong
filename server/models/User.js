@@ -4,9 +4,7 @@ const { Schema } = mongoose
 
 // TODO: ENV management
 // TODO: Consolidate mongoose initialization
-mongoose.connect('mongodb://127.0.0.1:27017/gitalong', {
-  useMongoClient: true
-})
+mongoose.connect('mongodb://127.0.0.1:27017/gitalong')
 
 const userSchema = new Schema({
   avatarUrl: String,
