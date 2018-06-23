@@ -11,28 +11,41 @@ import LanguageIcon from './LanguageIcon'
  *
  */
 const Repo = ({ repo }) => (
-  <li className={`panel repo`}>
+  <li className={`panel repo border-bottom`}>
     <div className="row">
-      <div className="col-xs">
+      <div className="col-xs-1">
         <img
           src={repo.getIn(['owner', 'avatarUrl'])}
-          width="32px"
-          height="32px"
-          className="avatar avatar-small"
+          width="100%"
+          className="avatar rounded-1"
         />
       </div>
       <div className="col-xs-11">
         <div className="row">
           <div className="col-xs-12">
-            <a className="text-bold" href={repo.get('htmlUrl')}>
-              {repo.get('name')}
-            </a>
+            <h3>
+              <a className="text-bold" href={repo.get('htmlUrl')}>
+                {repo.get('name')}
+              </a>
+            </h3>
           </div>
           <div className="col-xs-12">
             <p className="text-gray text-small mt-2 mb-3">
               {repo.get('description')}
             </p>
           </div>
+          {repo.get('topics').length > 0 && (
+            <div className="col-xs-12">
+              {repo.get('topics', []).map(topic => (
+                <a
+                  className="topic-tag topic-tag-link f6 my-1"
+                  key={`${repo.get('name')}-topics-${topic}`}
+                >
+                  {topic}
+                </a>
+              ))}
+            </div>
+          )}
           <div className="col-xs-12 mt-2 f6 text-gray">
             {repo.get('language') && (
               <span className="mr-3">
