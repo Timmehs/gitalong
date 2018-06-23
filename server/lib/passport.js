@@ -44,19 +44,16 @@ const passportSetup = function(app) {
           { githubId: serializedUser.githubId },
           serializedUser,
           options,
-          function(err, doc, raw) {
+          function(err, doc) {
             if (err) {
               console.error(
                 'Passport/Github/Mongoose: Error upserting User ' + profile.id
               )
               console.log(err)
-              done(err, null)
+              return done(err, null)
             } else {
-              const userStatus = raw.lastErrorObject.updatedExisting
-                ? 'Existing'
-                : 'New'
-              console.log(`${userStatus} User "${doc.login}" logged in.`)
-              done(null, doc)
+              console.log(doc.login + ' signed in.')
+              return done(null, doc)
             }
           }
         )

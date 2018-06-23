@@ -19,7 +19,7 @@ class Repos extends Component {
     const { repos, fetchingRepos } = this.props
     const showLoadingState = this.props.repos.size === 0
     return (
-      <ul className={`repos-list ${fetchingRepos && ' loading-repos'}`}>
+      <ul className={`repos-list row ${fetchingRepos && ' loading-repos'}`}>
         {showLoadingState ? (
           <div className="blankslate">
             <h3>
