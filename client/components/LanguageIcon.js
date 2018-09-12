@@ -4,7 +4,8 @@ const languageClass = language => {
   if (language === undefined) return 'github'
   const conversions = {
     HTML: 'html5',
-    CSS: 'css3'
+    CSS: 'css3',
+    Rust: 'github'
   }
   return conversions[language] || language.toLowerCase()
 }
