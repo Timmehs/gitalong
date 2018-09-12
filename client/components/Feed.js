@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 const Feed = ({ user, filter, languages }) => (
   <div className="col-xs-12">
     <div className="row">
-      <div className="col-xs-12 col-md-8 first-md">
+      <div className="col-xs-12 col-md-10 first-md">
         <nav className="UnderlineNav" style={{ marginBottom: '1.5rem' }}>
           <div className="UnderlineNav-body">
             <NavLink
@@ -32,7 +32,7 @@ const Feed = ({ user, filter, languages }) => (
         </nav>
         <ReposContainer filter={filter} />
       </div>
-      <div className="col-xs-12 col-md-3 col-md-offset-1 first-xs">
+      <div className="col-xs-12 col-md-2 first-xs">
         <LanguageList languages={languages} />
       </div>
     </div>
